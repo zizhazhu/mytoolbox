@@ -3,11 +3,20 @@
 
 import sys
 import pyperclip
+import hashlib
+
+# ppnn13%
+token = '31c3efd94dcbaf23a7b2faa497d58a99'
 
 Password = {'email':'*#061#', 'blog':'aabbdde', 'luggage':'dkstFeb.1st'}
 
-if len(sys.argv) < 2:
-    print('Usage: python pw.py [account] - copy account password')
+if len(sys.argv) < 3:
+    print('Usage: python pw.py [account] [password] - copy account password')
+    sys.exit()
+
+md5passwd = hashlib.md5(sys.argv[2].encode())
+if md5passwd.hexdigest() != token:
+    print('Wrong password!')
     sys.exit()
 
 account = sys.argv[1]
