@@ -5,9 +5,20 @@ import sys
 import pyperclip
 import hashlib
 
-# ppnn13%
-token = '31c3efd94dcbaf23a7b2faa497d58a99'
+passwd = hashlib.md5()
+passwdtxt = ''
+try:
+    passwdfile = open('passwd.dat', 'r')
+    passwdfile.read(passwdtxt)
+except:
+    passwdtxt = input('Please enter a new password:')
+    passwd.update(passwdtxt.encode())
+    passwdtxt = passwd.hexdigest()
 
+passwdfile = open('passwd.dat', 'w')
+passwdfile.write(passwdtxt)
+
+'''
 Password = {'email':'*#061#', 'blog':'aabbdde', 'luggage':'dkstFeb.1st'}
 
 if len(sys.argv) < 3:
@@ -25,4 +36,4 @@ if account in Password:
     print('Password for ' + account + ' copied to clipboard.')
 else:
     print('There is no account named ' + account)
-
+'''
