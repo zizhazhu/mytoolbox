@@ -7,16 +7,29 @@ import hashlib
 
 passwd = hashlib.md5()
 passwdtxt = ''
+passwdmd5 = ''
 try:
     passwdfile = open('passwd.dat', 'r')
-    passwdfile.read(passwdtxt)
+    passwdmd5 = passwdfile.read()
+    if len(passwdmd5) != 32:
+        raise IOError
 except:
     passwdtxt = input('Please enter a new password:')
     passwd.update(passwdtxt.encode())
-    passwdtxt = passwd.hexdigest()
+    passwdmd5 = passwd.hexdigest()
+    passwdfile = open('passwd.dat', 'w')
+    passwdfile.write(passwdmd5)
+else:
+    for i in range(3):
+        passwdtxt = input('Please enter your password:')
+        passwd.update(passwdtxt.encode())
+        if passwdmd5 != passwd.hexdigest():
+            print('Wrong passwd! Please try again.')
+    else:
+        print("You've tried three times.")
+        sys.exit()
 
-passwdfile = open('passwd.dat', 'w')
-passwdfile.write(passwdtxt)
+cmd = input('Please enter your command:')
 
 '''
 Password = {'email':'*#061#', 'blog':'aabbdde', 'luggage':'dkstFeb.1st'}
