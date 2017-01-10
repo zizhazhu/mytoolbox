@@ -1,5 +1,2 @@
-*.*
-!.gitignore
-
-# python source file
-!*.py
+.idea
+passwd
