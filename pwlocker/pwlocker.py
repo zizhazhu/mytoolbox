@@ -9,7 +9,7 @@ passwd = hashlib.md5()
 passwdtxt = ''
 passwdmd5 = ''
 try:
-    passwdfile = open('passwd.dat', 'r')
+    passwdfile = open('passwd', 'r')
     passwdmd5 = passwdfile.read()
     if len(passwdmd5) != 32:
         raise IOError
@@ -17,7 +17,7 @@ except:
     passwdtxt = input('Please enter a new password:')
     passwd.update(passwdtxt.encode())
     passwdmd5 = passwd.hexdigest()
-    passwdfile = open('passwd.dat', 'w')
+    passwdfile = open('passwd', 'w')
     passwdfile.write(passwdmd5)
 else:
     for i in range(3):
@@ -30,6 +30,10 @@ else:
         sys.exit()
 
 cmd = input('Please enter your command:')
+if cmd == 'add':
+    name = input('Please enter the account name:')
+    description = input('Please enter a short description:')
+    password = input('Please enter the password:')
 
 '''
 Password = {'email':'*#061#', 'blog':'aabbdde', 'luggage':'dkstFeb.1st'}
